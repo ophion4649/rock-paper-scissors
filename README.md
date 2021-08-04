@@ -1,4 +1,4 @@
-#Rock-Paper-Scissors!
+# Rock-Paper-Scissors!
 
 Here is my code for the 2nd project of **The Odin Project** curriculum.
 
