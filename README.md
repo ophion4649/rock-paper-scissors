@@ -9,3 +9,5 @@ This project has introduced basic JavaScript. During the coding process the foll
 - Debugging via Chrome Developer Tools
 - Problem solving oriented thought processes
 - DRY focused refactoring
+
+Viewable at: https://ophion4649.github.io/rock-paper-scissors/
