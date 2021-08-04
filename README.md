@@ -10,4 +10,4 @@ This project has introduced basic JavaScript. During the coding process the foll
 - Problem solving oriented thought processes
 - DRY focused refactoring
 
-Viewable at: https://ophion4649.github.io/rock-paper-scissors/
+Viewable at: https://ophion4649.github.io/rock-paper-scissors/ (output is console based)
