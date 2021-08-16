@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+:root {
+  --main-color: #1d3557;
+  --color-sub: #f1faee
+  ;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: var(--main-color);
+  color: var(--color-sub);
+}
+
+.heading {
+  padding: 20px 0px;
+  text-align: center;
+  color: var(--main-color);
+  font-size: 55px;
+  font-weight: 600;
+  background-color: var(--color-sub);
+}
+
+.image {
+    width: 80px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  text-align: center;
+}
+
+.card-image {
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-image:hover {
+    animation: pulsate-fwd 0.5s ease-in-out infinite both;
+    animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+@keyframes pulsate-fwd{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+
+.card-text {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--color-sub);
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  font-size: 40px;
+}
+
+.message {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.dashboard {
+  padding-top: 5px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-sub);
+  color: var(--main-color);
+  min-height: 100%;
+}
+
+.dashboard-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 20px;
+}
+
+.headindg-sub {
+  font-size: 35px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.score {
+    font-family: "Anton", sans-serif;
+    font-size: 5em;
+}
