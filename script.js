@@ -1,48 +1,118 @@
+// Get all necessary DOM nodes
+const images = Array.from(document.querySelectorAll('.card-image'));
+const message = document.querySelector('.message');
+const scorePlayer = document.querySelector('.player-score');
+const scoreComputer = document.querySelector('.computer-score');
+const selectionPlayer = document.querySelector('.player-selection');
+const selectionComputer = document.querySelector('.computer-selection');
+
 let playerScore = 0;
 let computerScore = 0;
-const ROUNDCOUNT = 5;
 
-function computerPlay() {
-    const choice = ["Rock", "Paper", "Scissors"];
-    return choice[Math.floor(Math.random() * 3)];
-}
 
-function playerPlay() {
-    return prompt("What is your choice?");
-}
+// Start GAME when user clicks on an image
+images.forEach((image) =>
+  image.addEventListener('click', () => {
+    if (playerScore >= 5 || computerScore >= 5) {
+      return;
+    }
+    game(image.dataset.image);
+  })
+);
 
-function casify(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-}
+/* Game LOGIC */
 
-function displayScore() {
-    console.log(`Computer:${computerScore} Player:${playerScore}`);
+function getComputerSelection() {
+  let computerNumber = random(3);
+  let computerGuess = '';
+
+  switch (computerNumber) {
+    case 1:
+      computerGuess = 'Rock';
+      break;
+    case 2:
+      computerGuess = 'Paper';
+      break;
+    case 3:
+      computerGuess = 'Scissors';
+      break;
+    default:
+      break;
+  }
+
+  return computerGuess;
 }
 
 function playRound(playerSelection, computerSelection) {
-    const ps = casify(playerSelection);
-    const cs = casify(computerSelection);
-    if (ps === cs) {
-        console.log(`It's a Draw! You both chose ${ps}!`);
-        return 1;
-    }
-    const rules = { Rock: "Scissors", Paper: "Rock", Scissors: "Paper" };
-    if (cs === rules[ps]) {
-        console.log(`You Win! ${ps} beats ${cs}!`);
-        playerScore++;
+  let msg = '';
+
+  if (playerSelection === 'Rock') {
+    if (computerSelection === 'Paper') {
+      msg = 'You Lose! Paper beats Rock';
+    } else if (computerSelection === 'Scissors') {
+      msg = 'You Win! Rock beats Scissors';
     } else {
-        console.log(`You Lose! ${cs} beats ${ps}!`);
-        computerScore++;
+      msg = "It's a tie";
     }
+  } else if (playerSelection === 'Paper') {
+    if (computerSelection === 'Scissors') {
+      msg = 'You Lose! Scissors beats Paper';
+    } else if (computerSelection === 'Rock') {
+      msg = 'You Win! Paper beats Rock';
+    } else {
+      msg = "It's a tie";
+    }
+  } else if (playerSelection === 'Scissors') {
+    if (computerSelection === 'Rock') {
+      msg = 'You Lose! Rock beats Scissors';
+    } else if (computerSelection === 'Paper') {
+      msg = 'You Win! Scissors beats Paper';
+    } else {
+      msg = "It's a tie";
+    }
+  }
+
+  return msg;
 }
 
-function game() {
-    for (let i = 0; i < ROUNDCOUNT; i++) {
-        playRound(playerPlay(), computerPlay());
-        displayScore();
-    }
-    if (playerScore === computerScore) console.log("It's a Draw!");
-    if (playerScore > computerScore ? "You Win!" : "You Lose");
+function createParagWithText(text) {
+  const p = document.createElement('p');
+  p.textContent = text;
+
+  return p;
 }
 
-game();
+function game(playerSelect) {
+  let playerSelection = capitalize(playerSelect);
+  let computerSelection = getComputerSelection();
+
+  let roundResult = playRound(playerSelection, computerSelection);
+
+  if (roundResult.search('You Win!') > -1) {
+    playerScore++;
+  } else if (roundResult.search('You Lose!') > -1) {
+    computerScore++;
+  }
+
+  scorePlayer.textContent = playerScore;
+  scoreComputer.textContent = computerScore;
+  message.textContent = roundResult;
+  selectionPlayer.appendChild(createParagWithText(playerSelection));
+  selectionComputer.appendChild(createParagWithText(computerSelection));
+
+  if (playerScore >= 5 && computerScore < 5) {
+    message.textContent = 'Game Over. You Win!';
+  } else if (playerScore < 5 && computerScore >= 5) {
+    message.textContent = 'Game Over. You Lose!';
+  }
+}
+
+function random(number) {
+  return Math.floor(Math.random() * number + 1);
+}
+
+function capitalize(string) {
+  return (
+    string.toLowerCase().charAt(0).toUpperCase() + string.toLowerCase().slice(1)
+  );
+}
